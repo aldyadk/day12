@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form action="http://google.com" onsubmit="return handleSubmit(event)">
+    <label for="user_name">Nama</label><br>
+    <input type="text" id="user_name"><br><br>
+    <label for="user_email">Email</label><br>
+    <input type="email" id="user_email"><br><br>
+    <label for="user_pwd">Password</label><br>
+    <input type="password" id="user_pwd"><br><br>
+    <input type="submit" value="kirim!">
+  </form>
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault()
+      validateForm()
+    }
+
+    function validateForm(){
+      const form = document.forms
+      const userName = form[0][0].value;
+      const userEmail = form[0][1].value;
+      const userPwd = form[0][2].value;
+      
+      if(!userName.length){
+        return alert('harus isi nama')
+      }
+      const patterEmail = /[^@]+@\w{3,}\.[a-z]{2,}\.*[a-z]*/
+      if(!patterEmail.test(userEmail)){
+        return alert('format email tidak valid')
+      }
+
+      const pat1 = /[\W]+/
+      const pat2 = /\d+/
+      const pat3 = /[A-Z]+/
+      const pat4 = /.{8,}/
+      if(!pat1.test(userPwd) || !pat2.test(userPwd) || !pat3.test(userPwd) || !pat4.test(userPwd)){
+        return alert('format password tidak valid')
+      }
+
+      window.location.href = 'http://google.com'
+    }
+  </script>
+</body>
+</html>
